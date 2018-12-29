@@ -53,10 +53,3 @@ for chunk in range(14):
 
     M = sam.unimap_coadd(files=channel_maps_list, mpi=True, tag=output_tag+"_chunk{:02d}".format(chunk), output=OUTPUT_DIR)
     print("Chunk {} complete".format(chunk))
-
-# Remove the per-detector maps
-print("\nRemoving the per-detector maps...\n")
-for SOURCE_DIR in SOURCE_DIR_LIST:
-    if os.path.exists(SOURCE_DIR):
-        shutil.rmtree(SOURCE_DIR)
-print("Finished!\n")
