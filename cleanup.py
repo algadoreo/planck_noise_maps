@@ -44,7 +44,7 @@ for r in range(100):
 
             # Print a notice if a run was cleaned
             if del_count > 0:
-                print("Run {} cleaned\n".format(r))
+                print("\nRun {} cleaned\n".format(r))
                 print("----------\n")
 
         # ... or these directories are empty...
