@@ -21,3 +21,7 @@ Other than having the latest versions of `numpy` and `spider_tools`, this suite 
 If you are on a system with a SLURM scheduler, `mpi_launcher.sh` is your job-submitting script. Modify it as needed. For maximum efficiency, use a loop inside this script to avoid having to manually submit multiple jobs.
 
 It runs through steps 1–3 above in one go by calling `mpi_filt_planck_noise_maps.sh`. Be sure to check the `SBATCH` options first!
+
+Once all the detector-specific maps are complete (X1 through X6), run `coadd_freq_interleaved_planck_noise_maps.py` to perform step 4.
+
+Run `cleanup.py` to remove files that are no longer needed after the final maps (step 4) are complete. These include the TODs and any intermediary maps produced. While it may be a good idea to keep some TODs around while testing, bear in mind that a single TOD is about 600 MB in size; multiplying by the 1859 “good” channels on SPIDER brings this to about 1 TB.
