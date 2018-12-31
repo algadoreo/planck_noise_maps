@@ -34,8 +34,10 @@ if not os.path.exists(SOURCE_DIR):
     print("Nothing to coadd; source directory does not exist:")
     print(SOURCE_DIR)
     exit(1)
-if not os.path.exists(OUTPUT_DIR):
+try:
     os.mkdir(OUTPUT_DIR)
+except:
+    pass
 
 
 ### Main body

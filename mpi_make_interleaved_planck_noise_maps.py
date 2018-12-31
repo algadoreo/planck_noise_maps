@@ -39,8 +39,10 @@ product = os.path.join(ROOT_DIR, product_tag)
 tod_suffix = '_' + product_tag.upper()
 
 OUTPUT_DIR = os.path.join(SOURCE_DIR, product_tag+'_interleaved_mpi')
-if not os.path.exists(OUTPUT_DIR):
+try:
     os.mkdir(OUTPUT_DIR)
+except:
+    pass
 
 
 ### Main body
