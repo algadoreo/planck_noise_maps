@@ -34,6 +34,11 @@ if not os.path.exists(SOURCE_DIR):
     print("Nothing to coadd; source directory does not exist:")
     print(SOURCE_DIR)
     exit(1)
+if len(os.listdir(SOURCE_DIR)) != 2240:
+    print("Source directory incomplete:")
+    print(SOURCE_DIR)
+    print("\nCoadding aborted\n")
+    exit(1)
 try:
     os.mkdir(OUTPUT_DIR)
 except:

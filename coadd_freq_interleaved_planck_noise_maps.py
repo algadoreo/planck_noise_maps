@@ -48,7 +48,13 @@ for chunk in range(14):
             exit(1)
         channel_maps_list.append(os.path.join(SOURCE_DIR, "vec_"+product_tag+"_chunk{:02d}.fits".format(chunk)))
     
-    print("Now starting chunk {:02d}: {} maps to coadd".format(chunk, len(channel_maps_list)))
+    if len(channel_maps_list) == 3:
+        print("Now starting chunk {:02d}: {} maps to coadd".format(chunk, len(channel_maps_list)))
 
-    M = sam.unimap_coadd(files=channel_maps_list, mpi=True, tag=output_tag+"_chunk{:02d}".format(chunk), output=OUTPUT_DIR)
-    print("Chunk {:02d} complete".format(chunk))
+        M = sam.unimap_coadd(files=channel_maps_list, mpi=True, tag=output_tag+"_chunk{:02d}".format(chunk), output=OUTPUT_DIR)
+        print("Chunk {:02d} complete".format(chunk))
+    else:
+        print("Source directory incomplete:")
+        print(SOURCE_DIR)
+        print("\nCoadding aborted\n")
+        continue
