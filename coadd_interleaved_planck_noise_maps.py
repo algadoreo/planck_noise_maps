@@ -53,9 +53,3 @@ for chunk in range(14):
     print("{} maps to coadd".format(len(channel_maps_list)))
 
     M = sam.unimap_coadd(files=channel_maps_list, mpi=True, tag=product_tag+"_chunk{:02d}".format(chunk), output=OUTPUT_DIR)
-
-# Remove the intermediary maps created by MPI
-if os.path.exists(SOURCE_DIR):
-    print("\nRemoving intermediary maps made by each MPI process...\n")
-    shutil.rmtree(SOURCE_DIR)
-    print("Finished!\n")
