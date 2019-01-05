@@ -33,7 +33,8 @@ if not os.path.exists(OUTPUT_DIR):
     os.mkdir(OUTPUT_DIR)
 
 ### Main body
-print("\nCoadding maps from the {} GHz detectors\n".format(freq))
+print("\nCoadding maps from the {} GHz detectors".format(freq))
+print("Reading from subset {} map {:04d}\n".format(psubset.upper(), run))
 for chunk in range(14):
     channel_maps_list = []
     
