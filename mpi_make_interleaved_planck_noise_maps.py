@@ -11,13 +11,13 @@ size = comm.Get_size()      # total number of processes
 
 
 if len(sys.argv) != 5:
-    print('\nUsage: python bespoke_map.py <fpu_no> <planck_subset> <map_no> <chunk_no>\n')
+    print('\nUsage: python mpi_make_interleaved_planck_noise_maps.py <fpu_no> <planck_subset> <map_no> <chunk_no>\n')
     exit(1)
 
 try:
     fpu = np.int8(sys.argv[1])
 except:
-    print('\nUsage: python bespoke_map.py <fpu_no> <planck_subset> <map_no> <chunk_no>\n')
+    print('\nUsage: python mpi_make_interleaved_planck_noise_maps.py <fpu_no> <planck_subset> <map_no> <chunk_no>\n')
     exit(1)
 else:
     if fpu < 1 or fpu > 6:

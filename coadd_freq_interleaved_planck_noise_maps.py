@@ -4,13 +4,13 @@ import sys, os, shutil
 
 
 if len(sys.argv) != 4:
-    print('\nUsage: python bespoke_map.py <frequency> <planck_subset> <map_no>\n')
+    print('\nUsage: python coadd_freq_interleaved_planck_noise_maps.py <frequency> <planck_subset> <map_no>\n')
     exit(1)
 
 try:
     freq = np.uint8(sys.argv[1])
 except:
-    print('\nUsage: python bespoke_map.py <frequency> <planck_subset> <map_no>\n')
+    print('\nUsage: python coadd_freq_interleaved_planck_noise_maps.py <frequency> <planck_subset> <map_no>\n')
     exit(1)
 else:
     if freq != 100 and freq != 143:

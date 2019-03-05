@@ -5,13 +5,13 @@ import glob
 
 
 if len(sys.argv) != 4:
-    print('\nUsage: python bespoke_map.py <fpu_no> <planck_subset> <map_no>\n')
+    print('\nUsage: python coadd_interleaved_planck_noise_maps.py <fpu_no> <planck_subset> <map_no>\n')
     exit(1)
 
 try:
     fpu = np.int8(sys.argv[1])
 except:
-    print('\nUsage: python bespoke_map.py <fpu_no> <planck_subset> <map_no>\n')
+    print('\nUsage: python coadd_interleaved_planck_noise_maps.py <fpu_no> <planck_subset> <map_no>\n')
     exit(1)
 else:
     if fpu < 1 or fpu > 6:
