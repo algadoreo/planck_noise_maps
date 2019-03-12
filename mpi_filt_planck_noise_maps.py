@@ -51,13 +51,13 @@ SOURCE_MAP = ROOT_DIR + '{}_{}/planck_hfi_{}_noise_sim_{:04d}.fits'.format(freq,
 if rank == 0:
     print('Reading map from\n' + SOURCE_MAP)
 
-M = sa.UnifileMap(default_latest=True, cal=cal, net=net)
-M.init_source(source_map=SOURCE_MAP, beam_product=beam, beam_field=beam_field)
+S = sa.UnifileSim(default_latest=True, cal=cal, net=net, add_from_map=True)
+S.init_source(source_map=SOURCE_MAP, beam_product=beam, beam_field=beam_field, units='K')
 
-sopts = M.event_partition(prefix='hwp_step', event=event)
-slices = M.event_partition(prefix='hwp_step', return_slices=True, event=event)
+sopts = S.event_partition(prefix='hwp_step', event=event)
+slices = S.event_partition(prefix='hwp_step', return_slices=True, event=event)
 
-good_channels_list = M.good_channels(fpu)
+good_channels_list = S.good_channels(fpu)
 
 # Use MPI to divide the job into segments
 seg_len = int(len(good_channels_list)/size)
@@ -73,15 +73,15 @@ else:
 channels_list_segment = good_channels_list[seg_start:seg_stop]
 
 for channel in channels_list_segment:
-    tod_noise = np.zeros(M.get_sync_count(event=event), dtype='float32')
+    tod_noise = np.zeros(S.get_sync_count(event=event), dtype='float32')
     for sopt, sli in zip(sopts, slices):
-        tod_noise[sli] = M.get_mce_data(channel, product=None, **sopt)
+        tod_noise[sli] = S.get_mce_data(channel, product=None, **sopt)
 
-    data = np.zeros(M.get_sync_count(event=event), dtype='float32')
-    flags = np.ones(M.get_sync_count(event=event), dtype='uint8')
+    data = np.zeros(S.get_sync_count(event=event), dtype='float32')
+    flags = np.ones(S.get_sync_count(event=event), dtype='uint8')
 
     for sopt, sli in zip(sopts, slices):
-        noise_filt, noise_flag = M.get_filtered_tod(channels=channel, product='dcclean08',
+        noise_filt, noise_flag = S.get_filtered_tod(channels=channel, product='dcclean08',
                                         return_flag=True, filter_turnarounds=True, tod=np.atleast_2d(tod_noise[sli]),
                                         flag=None, extra_flag_product=True, extra_flag_mask=0x1FFF,
                                         filter_num_scans=1, filter_dipole=False, scan_cut_adu=5, scan_cut_net=1.5,
